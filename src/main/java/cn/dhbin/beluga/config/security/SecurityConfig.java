@@ -1,5 +1,6 @@
 package cn.dhbin.beluga.config.security;
 
+import cn.dhbin.beluga.config.Constant;
 import cn.dhbin.beluga.upms.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final String[] EXCLUDE_PATH = new String[]{
             "/doc.html", "/webjars/**", "/service-worker.js", "/swagger-resources/**", "/v2/api-docs",
-            "/user/login"
+            Constant.UMPS_PREFIX + "/user/login",
+            "/code"
     };
 
     @Autowired

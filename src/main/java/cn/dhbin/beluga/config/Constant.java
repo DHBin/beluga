@@ -23,4 +23,13 @@ public interface Constant {
      */
     String AUTH_KEY_NAME = "auth";
 
+    /**
+     * 验证码缓存key前缀
+     */
+    String CODE_KEY_PREFIX = "code_key::";
+
+    /**
+     * 用户管理模块前缀
+     */
+    String UMPS_PREFIX = "/upms";
 }

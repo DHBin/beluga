@@ -48,6 +48,12 @@
         </dependency>
         <!-- minion -->
 
+        <!-- 验证码 -->
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+        </dependency>
+
         <!--文档-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>

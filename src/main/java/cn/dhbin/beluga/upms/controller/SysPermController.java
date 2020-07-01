@@ -1,5 +1,6 @@
 package cn.dhbin.beluga.upms.controller;
 
+import cn.dhbin.beluga.config.Constant;
 import cn.dhbin.beluga.upms.entity.SysPerm;
 import cn.dhbin.beluga.upms.model.dto.SysPermDto;
 import cn.dhbin.beluga.upms.service.SysPermService;
@@ -21,7 +22,7 @@ import java.util.List;
  * @date 2020/3/20
  */
 @RestController
-@RequestMapping("/perm")
+@RequestMapping(Constant.UMPS_PREFIX + "/perm")
 @RequiredArgsConstructor
 @Api(tags = "权限")
 public class SysPermController extends RestfulController {

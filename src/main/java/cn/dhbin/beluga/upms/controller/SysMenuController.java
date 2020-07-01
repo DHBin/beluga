@@ -1,5 +1,6 @@
 package cn.dhbin.beluga.upms.controller;
 
+import cn.dhbin.beluga.config.Constant;
 import cn.dhbin.beluga.upms.entity.SysMenu;
 import cn.dhbin.beluga.upms.model.dto.SysMenuDto;
 import cn.dhbin.beluga.upms.model.param.SysMenuParam;
@@ -24,7 +25,7 @@ import java.util.List;
  * @date 2020/3/12
  */
 @RestController
-@RequestMapping("/menu")
+@RequestMapping(Constant.UMPS_PREFIX + "/menu")
 @RequiredArgsConstructor
 @Api(tags = "菜单")
 public class SysMenuController extends RestfulController {
