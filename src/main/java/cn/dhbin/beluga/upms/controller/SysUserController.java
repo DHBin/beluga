@@ -2,12 +2,14 @@ package cn.dhbin.beluga.upms.controller;
 
 import cn.dhbin.beluga.upms.entity.SysUser;
 import cn.dhbin.beluga.upms.exception.LoginFailedException;
+import cn.dhbin.beluga.upms.model.PermUser;
 import cn.dhbin.beluga.upms.model.dto.UserDto;
 import cn.dhbin.beluga.upms.model.dto.UserInfoDto;
 import cn.dhbin.beluga.upms.model.enums.ErrorCode;
 import cn.dhbin.beluga.upms.model.param.SysUserParam;
 import cn.dhbin.beluga.upms.service.LoginService;
 import cn.dhbin.beluga.upms.service.SysUserService;
+import cn.dhbin.beluga.util.SecurityUtil;
 import cn.dhbin.minion.core.common.response.ApiResponse;
 import cn.dhbin.minion.core.mybatis.model.PageModel;
 import cn.dhbin.minion.core.restful.controller.RestfulController;
@@ -58,8 +60,9 @@ public class SysUserController extends RestfulController {
     @GetMapping("/logout")
     @ApiOperation(value = "登出")
     public ApiResponse<?> logout() {
-        // todo 实现登出
-        return null;
+        PermUser currentPermUser = SecurityUtil.getCurrentPermUser();
+        loginService.logout(currentPermUser.getToken());
+        return ok();
     }
 
     @GetMapping
