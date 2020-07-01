@@ -1,6 +1,8 @@
 package cn.dhbin.beluga.config.security;
 
+import cn.dhbin.beluga.upms.service.LoginService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,8 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.header.HeaderWriterFilter;
 
 /**
  * 鉴权配置
@@ -22,17 +23,24 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final AuthenticationSuccessHandler successHandler;
+    private final String[] EXCLUDE_PATH = new String[]{
+            "/doc.html", "/webjars/**", "/service-worker.js", "/swagger-resources/**", "/v2/api-docs",
+            "/user/login"
+    };
 
-    private final AuthenticationFailureHandler failureHandler;
+    @Autowired
+    private LoginService loginService;
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .cors().disable()
-                .formLogin()
-                .successHandler(successHandler)
-                .failureHandler(failureHandler);
+                .formLogin().disable()
+                .sessionManagement().disable()
+                .addFilterAfter(new TokenAuthenticationFilter(loginService), HeaderWriterFilter.class)
+                .authorizeRequests()
+                .antMatchers(EXCLUDE_PATH).permitAll()
+                .anyRequest().authenticated();
     }
 
     @Bean

@@ -6,4 +6,4 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/beluga?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
 swagger:
-  base-package: cn.dhbin.beluga.controller
+  base-package: cn.dhbin.beluga

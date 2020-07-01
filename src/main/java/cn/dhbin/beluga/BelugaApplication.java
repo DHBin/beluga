@@ -10,7 +10,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @author donghaibin
  */
 @SpringBootApplication
-@MapperScan("cn.dhbin.beluga.mapper")
+@MapperScan("cn.dhbin.beluga.*.mapper")
 @EnableCaching
 @EnableAspectJAutoProxy(exposeProxy = true)
 public class BelugaApplication {
