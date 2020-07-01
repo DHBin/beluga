@@ -41,8 +41,9 @@ public class SysUserController extends RestfulController {
     @GetMapping("getUserInfo")
     @ApiOperation(value = "获取当前用户信息")
     public ApiResponse<UserInfoDto> getUserInfo() {
-        // todo 实现获取当前用户信息
-        return null;
+        PermUser currentPermUser = SecurityUtil.getCurrentPermUser();
+        UserInfoDto userInfoDto = currentPermUser.convert(UserInfoDto.class);
+        return ok(userInfoDto);
     }
 
     @PostMapping("/login")

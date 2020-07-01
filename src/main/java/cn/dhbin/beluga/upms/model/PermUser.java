@@ -26,7 +26,7 @@ public class PermUser implements Convert {
     /**
      * 用户id
      */
-    private Long userId;
+    private Long id;
 
     /**
      * 用户名
@@ -34,8 +34,23 @@ public class PermUser implements Convert {
     private String username;
 
     /**
+     * 手机号码
+     */
+    private String phone;
+
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
      * 权限
      */
-    private List<String> perms;
+    private List<String> authorities;
+
+    /**
+     * 角色
+     */
+    private List<String> roles;
 
 }

@@ -39,7 +39,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             if (permUser != null) {
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(permUser.getUsername(), permUser,
-                                permUser.getPerms().stream()
+                                permUser.getAuthorities().stream()
                                         .map(SimpleGrantedAuthority::new)
                                         .collect(Collectors.toList())
                         );

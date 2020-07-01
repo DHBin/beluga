@@ -2,6 +2,7 @@ package cn.dhbin.beluga.upms.service.impl;
 
 import cn.dhbin.beluga.config.Constant;
 import cn.dhbin.beluga.upms.entity.SysPerm;
+import cn.dhbin.beluga.upms.entity.SysRole;
 import cn.dhbin.beluga.upms.entity.SysUser;
 import cn.dhbin.beluga.upms.entity.SysUserRole;
 import cn.dhbin.beluga.upms.exception.LoginFailedException;
@@ -40,6 +41,8 @@ public class LoginServiceImpl implements LoginService {
 
     private final SysPermService sysPermService;
 
+    private final SysRoleService sysRoleService;
+
     private final RedisTemplate<String, Object> redisTemplate;
 
 
@@ -76,6 +79,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     private PermUser buildPermUser(@NonNull SysUser sysUser) {
+        List<SysRole> roles = this.sysRoleService.getRoleByUserId(sysUser.getId());
         // 用户-角色关联关系
         List<SysUserRole> userRoleList = sysUserRoleService.getByUserId(sysUser.getId());
 
@@ -100,9 +104,10 @@ public class LoginServiceImpl implements LoginService {
         mergePermList.addAll(rolePermList);
         mergePermList.addAll(roleMenuPermList);
         PermUser permUser = new PermUser();
+        permUser.setRoles(roles.stream().map(SysRole::getRoleKey).distinct().collect(Collectors.toList()));
         permUser.setUsername(sysUser.getUsername())
-                .setUserId(sysUser.getId())
-                .setPerms(mergePermList);
+                .setId(sysUser.getId())
+                .setAuthorities(mergePermList);
         return permUser;
     }
 

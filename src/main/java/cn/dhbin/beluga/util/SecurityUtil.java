@@ -12,7 +12,7 @@ public class SecurityUtil {
 
     public static Long getUserId() {
         PermUser permUser = getCurrentPermUser();
-        return permUser.getUserId();
+        return permUser.getId();
     }
 
     /**
