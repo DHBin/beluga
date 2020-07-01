@@ -20,7 +20,12 @@ public enum ErrorCode implements IErrorCode<Object> {
     /**
      * 用户名或密码错误
      */
-    LOGIN_FAILED(10_00_02, "用户名或密码错误");
+    LOGIN_FAILED(10_00_02, "用户名或密码错误"),
+
+    /**
+     * 验证码不正确
+     */
+    CAPTCHA_INVALID(10_00_03, "验证码不正确");
 
     private final Integer status;
 

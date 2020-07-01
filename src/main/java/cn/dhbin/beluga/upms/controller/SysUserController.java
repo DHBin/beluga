@@ -8,12 +8,14 @@ import cn.dhbin.beluga.upms.model.dto.UserDto;
 import cn.dhbin.beluga.upms.model.dto.UserInfoDto;
 import cn.dhbin.beluga.upms.model.enums.ErrorCode;
 import cn.dhbin.beluga.upms.model.param.SysUserParam;
+import cn.dhbin.beluga.upms.service.CaptchaService;
 import cn.dhbin.beluga.upms.service.LoginService;
 import cn.dhbin.beluga.upms.service.SysUserService;
 import cn.dhbin.beluga.util.SecurityUtil;
 import cn.dhbin.minion.core.common.response.ApiResponse;
 import cn.dhbin.minion.core.mybatis.model.PageModel;
 import cn.dhbin.minion.core.restful.controller.RestfulController;
+import cn.dhbin.minion.core.restful.util.ApiAssert;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,6 +41,8 @@ public class SysUserController extends RestfulController {
 
     private final LoginService loginService;
 
+    private final CaptchaService captchaService;
+
     @GetMapping("getUserInfo")
     @ApiOperation(value = "获取当前用户信息")
     public ApiResponse<UserInfoDto> getUserInfo() {
@@ -49,7 +53,9 @@ public class SysUserController extends RestfulController {
 
     @PostMapping("/login")
     @ApiOperation(value = "用户登录")
-    public ApiResponse<?> login(String username, String password) {
+    public ApiResponse<?> login(String username, String password, @RequestParam("r") String randomStr, String code) {
+        boolean valid = captchaService.valid(randomStr, code);
+        ApiAssert.isTrue(ErrorCode.CAPTCHA_INVALID, valid);
         try {
             String token = loginService.login(username, password);
             return ok(token);
