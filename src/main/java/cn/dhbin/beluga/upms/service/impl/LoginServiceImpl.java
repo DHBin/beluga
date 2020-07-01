@@ -10,8 +10,7 @@ import cn.dhbin.beluga.upms.service.*;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -40,7 +40,7 @@ public class LoginServiceImpl implements LoginService {
 
     private final SysPermService sysPermService;
 
-    private final CacheManager cacheManager;
+    private final RedisTemplate<String, Object> redisTemplate;
 
 
     @Override
@@ -53,24 +53,17 @@ public class LoginServiceImpl implements LoginService {
             throw new LoginFailedException(StrUtil.format("用户名[{}]密码错误", username));
         }
         PermUser permUser = buildPermUser(sysUser);
-        Cache cache = cacheManager.getCache(Constant.AUTH_KEY_NAME);
-        if (cache == null) {
-            throw new LoginFailedException(StrUtil.format("获取cache失败"));
-        }
         String token = UUID.fastUUID().toString(true);
+        permUser.setToken(token);
         // 存进缓存
-        cache.put(token, permUser);
+        redisTemplate.opsForValue().set(buildCacheKey(token), permUser, Constant.AUTH_PERIOD_OF_VALIDITY, TimeUnit.SECONDS);
         return token;
     }
 
     @Override
     @Nullable
     public PermUser getPermUser(String token) {
-        Cache cache = cacheManager.getCache(Constant.AUTH_KEY_NAME);
-        if (cache == null) {
-            throw new NullPointerException("cache == null");
-        }
-        PermUser permUser = cache.get(token, PermUser::new);
+        PermUser permUser = (PermUser) redisTemplate.opsForValue().get(buildCacheKey(token));
         if (permUser == null) {
             return null;
         }
@@ -79,12 +72,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public void logout(String token) {
-        Cache cache = cacheManager.getCache(Constant.AUTH_KEY_NAME);
-        if (cache == null) {
-            throw new NullPointerException("cache == null");
-        }
-        // 移除缓存
-        cache.evict(token);
+        redisTemplate.delete(buildCacheKey(token));
     }
 
     private PermUser buildPermUser(@NonNull SysUser sysUser) {
@@ -116,5 +104,9 @@ public class LoginServiceImpl implements LoginService {
                 .setUserId(sysUser.getId())
                 .setPerms(mergePermList);
         return permUser;
+    }
+
+    private String buildCacheKey(String token) {
+        return Constant.AUTH_KEY_NAME + "::" + token;
     }
 }

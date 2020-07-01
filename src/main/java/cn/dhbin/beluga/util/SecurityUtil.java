@@ -11,9 +11,19 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class SecurityUtil {
 
     public static Long getUserId() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        PermUser permUser = (PermUser) authentication.getCredentials();
+        PermUser permUser = getCurrentPermUser();
         return permUser.getUserId();
     }
+
+    /**
+     * 获取当前PermUser，包含token，用户名、权限等信息
+     *
+     * @return 当前PermUser
+     */
+    public static PermUser getCurrentPermUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (PermUser) authentication.getCredentials();
+    }
+
 
 }

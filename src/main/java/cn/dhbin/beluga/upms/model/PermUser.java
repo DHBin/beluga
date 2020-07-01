@@ -19,6 +19,11 @@ import java.util.List;
 public class PermUser implements Convert {
 
     /**
+     * token
+     */
+    private String token;
+
+    /**
      * 用户id
      */
     private Long userId;

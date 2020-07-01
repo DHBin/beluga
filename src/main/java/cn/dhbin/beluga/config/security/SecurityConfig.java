@@ -37,10 +37,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .formLogin().disable()
                 .sessionManagement().disable()
+                .logout().disable()
                 .addFilterAfter(new TokenAuthenticationFilter(loginService), HeaderWriterFilter.class)
                 .authorizeRequests()
                 .antMatchers(EXCLUDE_PATH).permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and().headers().cacheControl().disable();
     }
 
     @Bean
