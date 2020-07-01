@@ -6,14 +6,13 @@ import cn.dhbin.beluga.upms.model.param.SysMenuParam;
 import cn.dhbin.beluga.upms.model.param.UpdateRoleMenuParam;
 import cn.dhbin.beluga.upms.service.SysMenuService;
 import cn.dhbin.beluga.upms.service.SysRoleMenuService;
-import cn.dhbin.beluga.upms.service.SysUserService;
 import cn.dhbin.beluga.util.SecurityUtil;
 import cn.dhbin.minion.core.common.response.ApiResponse;
 import cn.dhbin.minion.core.restful.controller.RestfulController;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -27,17 +26,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/menu")
 @RequiredArgsConstructor
+@Api(tags = "菜单")
 public class SysMenuController extends RestfulController {
 
-    private final StringRedisTemplate redisTemplate;
-
-    private static final String TOP_MENU_KEY = "upms::topMenu";
-
-    private static final String MENU_KEY = "upms::menu";
-
     private final SysMenuService sysMenuService;
-
-    private final SysUserService sysUserService;
 
     private final SysRoleMenuService sysRoleMenuService;
 

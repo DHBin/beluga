@@ -1,5 +1,9 @@
 package cn.dhbin.beluga.util;
 
+import cn.dhbin.beluga.upms.model.PermUser;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 /**
  * @author donghaibin
  * @date 2020/6/30
@@ -7,8 +11,9 @@ package cn.dhbin.beluga.util;
 public class SecurityUtil {
 
     public static Long getUserId() {
-        // todo 获取当前用户id
-        return null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        PermUser permUser = (PermUser) authentication.getCredentials();
+        return permUser.getUserId();
     }
 
 }
