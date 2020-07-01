@@ -1,7 +1,9 @@
 package cn.dhbin.beluga.config;
 
+import cn.dhbin.beluga.util.SecurityUtil;
 import cn.dhbin.minion.core.common.IUserInfoProvider;
 import cn.dhbin.minion.core.mybatis.plugins.PerformanceInterceptor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,12 +13,19 @@ import org.springframework.context.annotation.Configuration;
  * @date 2020/3/16
  */
 @Configuration
+@Slf4j
 public class MybatisConfig {
 
     @Bean
     public IUserInfoProvider userInfoProvider() {
-        // todo 提供 userInfoProvider
-        return () -> 1L;
+        return () -> {
+            try {
+                return SecurityUtil.getUserId();
+            } catch (Exception e) {
+                log.warn("当前环境没有登录， 默认返回1L");
+                return 1L;
+            }
+        };
     }
 
     @Bean
