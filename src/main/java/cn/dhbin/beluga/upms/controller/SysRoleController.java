@@ -8,6 +8,7 @@ import cn.dhbin.minion.core.common.response.ApiResponse;
 import cn.dhbin.minion.core.mybatis.model.PageModel;
 import cn.dhbin.minion.core.restful.controller.RestfulController;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/role")
 @RequiredArgsConstructor
+@Api(tags = "权限")
 public class SysRoleController extends RestfulController {
 
     private final SysRoleService sysRoleService;
