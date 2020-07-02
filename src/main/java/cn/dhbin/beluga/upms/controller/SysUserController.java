@@ -1,6 +1,6 @@
 package cn.dhbin.beluga.upms.controller;
 
-import cn.dhbin.beluga.config.Constant;
+import cn.dhbin.beluga.upms.config.UpmsConstant;
 import cn.dhbin.beluga.upms.entity.SysUser;
 import cn.dhbin.beluga.upms.exception.LoginFailedException;
 import cn.dhbin.beluga.upms.model.PermUser;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
  * @date 2020/1/4
  */
 @RestController
-@RequestMapping(Constant.UMPS_PREFIX + "/user")
+@RequestMapping(UpmsConstant.UMPS_PREFIX + "/user")
 @RequiredArgsConstructor
 @Api(tags = "用户")
 @Slf4j

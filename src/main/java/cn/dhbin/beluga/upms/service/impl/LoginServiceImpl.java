@@ -1,6 +1,6 @@
 package cn.dhbin.beluga.upms.service.impl;
 
-import cn.dhbin.beluga.config.Constant;
+import cn.dhbin.beluga.upms.config.UpmsConstant;
 import cn.dhbin.beluga.upms.entity.SysPerm;
 import cn.dhbin.beluga.upms.entity.SysRole;
 import cn.dhbin.beluga.upms.entity.SysUser;
@@ -59,7 +59,7 @@ public class LoginServiceImpl implements LoginService {
         String token = UUID.fastUUID().toString(true);
         permUser.setToken(token);
         // 存进缓存
-        redisTemplate.opsForValue().set(buildCacheKey(token), permUser, Constant.AUTH_PERIOD_OF_VALIDITY, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(buildCacheKey(token), permUser, UpmsConstant.AUTH_PERIOD_OF_VALIDITY, TimeUnit.SECONDS);
         return token;
     }
 
@@ -112,6 +112,6 @@ public class LoginServiceImpl implements LoginService {
     }
 
     private String buildCacheKey(String token) {
-        return Constant.AUTH_KEY_NAME + "::" + token;
+        return UpmsConstant.AUTH_KEY_PREFIX + "::" + token;
     }
 }

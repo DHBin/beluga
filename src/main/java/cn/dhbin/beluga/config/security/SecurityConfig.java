@@ -1,6 +1,6 @@
 package cn.dhbin.beluga.config.security;
 
-import cn.dhbin.beluga.config.Constant;
+import cn.dhbin.beluga.config.ConfigConstant;
 import cn.dhbin.beluga.upms.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +21,15 @@ import org.springframework.security.web.header.HeaderWriterFilter;
  */
 @Configuration
 @RequiredArgsConstructor
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final String[] EXCLUDE_PATH = new String[]{
+            // api文档url
             "/doc.html", "/webjars/**", "/service-worker.js", "/swagger-resources/**", "/v2/api-docs",
-            Constant.UMPS_PREFIX + "/user/login",
+            // 用户登录url
+            ConfigConstant.UMPS_PREFIX + "/user/login",
+            // 获取验证码url
             "/code"
     };
 

@@ -1,6 +1,6 @@
 package cn.dhbin.beluga.upms.service.impl;
 
-import cn.dhbin.beluga.config.Constant;
+import cn.dhbin.beluga.upms.config.UpmsConstant;
 import cn.dhbin.beluga.upms.entity.SysMenu;
 import cn.dhbin.beluga.upms.entity.SysMenuPerm;
 import cn.dhbin.beluga.upms.entity.SysRoleMenu;
@@ -74,7 +74,7 @@ public class SysMenuServiceImpl extends MinionServiceImpl<SysMenuMapper, SysMenu
                 .sorted(Comparator.comparingInt(SysMenuDto::getOrderNum))
                 .collect(Collectors.toList());
 
-        return TreeUtil.buildByLoop(sysMenus, parentId == null ? Constant.ROOT_MENU : parentId);
+        return TreeUtil.buildByLoop(sysMenus, parentId == null ? UpmsConstant.ROOT_MENU : parentId);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class SysMenuServiceImpl extends MinionServiceImpl<SysMenuMapper, SysMenu
                 .map(sysMenu -> sysMenu.convert(SysMenuDto.class))
                 .sorted(Comparator.comparingInt(SysMenuDto::getOrderNum))
                 .collect(Collectors.toList());
-        return TreeUtil.buildByLoop(dtos, Constant.ROOT_MENU);
+        return TreeUtil.buildByLoop(dtos, UpmsConstant.ROOT_MENU);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class SysMenuServiceImpl extends MinionServiceImpl<SysMenuMapper, SysMenu
                 })
                 .sorted(Comparator.comparingInt(SysMenuDto::getOrderNum))
                 .collect(Collectors.toList());
-        return TreeUtil.buildByLoop(menuDtos, Constant.ROOT_MENU);
+        return TreeUtil.buildByLoop(menuDtos, UpmsConstant.ROOT_MENU);
     }
 
     @Override

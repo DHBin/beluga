@@ -1,6 +1,6 @@
 package cn.dhbin.beluga.upms.controller;
 
-import cn.dhbin.beluga.config.Constant;
+import cn.dhbin.beluga.upms.config.UpmsConstant;
 import cn.dhbin.beluga.upms.entity.SysRole;
 import cn.dhbin.beluga.upms.model.dto.SysRoleDto;
 import cn.dhbin.beluga.upms.model.param.SysRoleParam;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * @date 2020/3/20
  */
 @RestController
-@RequestMapping(Constant.UMPS_PREFIX + "/role")
+@RequestMapping(UpmsConstant.UMPS_PREFIX + "/role")
 @RequiredArgsConstructor
 @Api(tags = "权限")
 public class SysRoleController extends RestfulController {
