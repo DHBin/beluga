@@ -1,9 +1,11 @@
 package cn.dhbin.beluga.upms.service.impl;
 
+import cn.dhbin.beluga.upms.config.UpmsConstant;
 import cn.dhbin.beluga.upms.model.RequestMappingInfo;
 import cn.dhbin.beluga.upms.service.RequestMappingService;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +44,14 @@ public class RequestMappingServiceImpl implements RequestMappingService {
         Map<org.springframework.web.servlet.mvc.method.RequestMappingInfo, HandlerMethod> handlerMethods = mapping.getHandlerMethods();
         handlerMethods.forEach((requestMappingInfo, handlerMethod) -> {
             RequestMappingInfo info = new RequestMappingInfo();
-            info.setOwn(StrUtil.EMPTY);
+            Class<?> beanType = handlerMethod.getBeanType();
+            Api api = beanType.getDeclaredAnnotation(Api.class);
+            if (api != null && api.tags().length > 0) {
+                // 默认取 tags 的第一个指
+                info.setOwn(api.tags()[0]);
+            } else {
+                info.setOwn(UpmsConstant.DEFAULT_OWN);
+            }
 
             // 设置路径
             PatternsRequestCondition patternsCondition = requestMappingInfo.getPatternsCondition();
@@ -63,10 +72,10 @@ public class RequestMappingServiceImpl implements RequestMappingService {
                 info.setAuthorizations(String.join(StrUtil.COMMA, authorizations));
             }
 
-            // md5(method[] + path[])
+            // md5(own + method[] + path[])
             String methods = String.join(StrUtil.COMMA, info.getMethod());
             String paths = String.join(StrUtil.COMMA, info.getPath());
-            String id = SecureUtil.md5(methods + paths);
+            String id = SecureUtil.md5(info.getOwn() + methods + paths);
             info.setId(id);
             requestMappingInfos.add(info);
         });

@@ -49,4 +49,9 @@ public interface UpmsConstant {
      */
     long CAPTCHA_TIMEOUT_TIME = 60;
 
+    /**
+     * api文档 默认所属名
+     */
+    String DEFAULT_OWN = "未分类";
+
 }
