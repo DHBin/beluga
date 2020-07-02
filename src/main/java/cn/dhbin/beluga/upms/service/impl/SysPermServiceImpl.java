@@ -24,6 +24,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -97,6 +98,7 @@ public class SysPermServiceImpl extends MinionServiceImpl<SysPermMapper, SysPerm
 
     @Override
     @CacheEvict(cacheNames = CACHE_NAME, key = "'all'")
+    @Transactional(rollbackFor = Exception.class)
     public void reload() {
         this.baseMapper.delete(new QueryWrapper<>());
         List<RequestMappingInfo> mappingInfos = requestMappingService.all();
