@@ -33,6 +33,7 @@ public class CaptchaServiceImpl implements CaptchaService {
     public boolean valid(String rand, String code) {
         String cacheKey = CacheUtil.buildCacheKey(UpmsConstant.CODE_KEY_PREFIX, rand);
         String codeInRedis = (String) redisTemplate.opsForValue().get(cacheKey);
+        redisTemplate.delete(cacheKey);
         return StrUtil.equalsAnyIgnoreCase(code, codeInRedis);
     }
 }
