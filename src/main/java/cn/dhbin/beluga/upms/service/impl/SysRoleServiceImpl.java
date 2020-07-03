@@ -1,5 +1,6 @@
 package cn.dhbin.beluga.upms.service.impl;
 
+import cn.dhbin.beluga.upms.config.UpmsConstant;
 import cn.dhbin.beluga.upms.entity.SysRole;
 import cn.dhbin.beluga.upms.entity.SysRoleMenu;
 import cn.dhbin.beluga.upms.entity.SysRolePerm;
@@ -10,12 +11,16 @@ import cn.dhbin.beluga.upms.service.SysRoleMenuService;
 import cn.dhbin.beluga.upms.service.SysRolePermService;
 import cn.dhbin.beluga.upms.service.SysRoleService;
 import cn.dhbin.beluga.upms.service.SysUserRoleService;
+import cn.dhbin.beluga.util.AopUtil;
 import cn.dhbin.minion.core.mybatis.model.PageModel;
 import cn.dhbin.minion.core.mybatis.service.MinionServiceImpl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,8 +45,26 @@ public class SysRoleServiceImpl extends MinionServiceImpl<SysRoleMapper, SysRole
     @Override
     public List<SysRole> getRoleByUserId(Long userId) {
         List<SysUserRole> sysUserRoles = sysUserRoleService.getByUserId(userId);
-        return sysUserRoles.stream().map(sysUserRole -> lambdaQuery().eq(SysRole::getId, sysUserRole.getRid()).one())
+        return sysUserRoles.stream().map(sysUserRole -> AopUtil.getCurrentProxy(SysRoleService.class).getById(sysUserRole.getRid()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Cacheable(cacheNames = UpmsConstant.CACHE_ROLE_PREFIX, key = "#id")
+    public SysRole getById(Serializable id) {
+        return super.getById(id);
+    }
+
+    @Override
+    @CachePut(cacheNames = UpmsConstant.CACHE_ROLE_PREFIX, key = "#entity.id")
+    public SysRole updateByIdAndReturn(SysRole entity) {
+        return super.updateByIdAndReturn(entity);
+    }
+
+    @Override
+    @CacheEvict(cacheNames = UpmsConstant.CACHE_ROLE_PREFIX, key = "#entity.id")
+    public boolean updateById(SysRole entity) {
+        return super.updateById(entity);
     }
 
     @Override
@@ -67,7 +90,7 @@ public class SysRoleServiceImpl extends MinionServiceImpl<SysRoleMapper, SysRole
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(SysRole sysRole, List<String> perms) {
-        this.updateByIdAndReturn(sysRole);
+        AopUtil.getCurrentProxy(SysRoleService.class).updateByIdAndReturn(sysRole);
         this.sysRolePermService.updateByRoleId(sysRole.getId(), perms);
     }
 

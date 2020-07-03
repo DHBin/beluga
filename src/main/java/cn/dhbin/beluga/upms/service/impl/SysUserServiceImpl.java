@@ -8,6 +8,7 @@ import cn.dhbin.beluga.upms.model.enums.ErrorCode;
 import cn.dhbin.beluga.upms.service.SysRoleService;
 import cn.dhbin.beluga.upms.service.SysUserRoleService;
 import cn.dhbin.beluga.upms.service.SysUserService;
+import cn.dhbin.beluga.util.AopUtil;
 import cn.dhbin.minion.core.mybatis.model.PageModel;
 import cn.dhbin.minion.core.mybatis.service.MinionServiceImpl;
 import cn.dhbin.minion.core.restful.util.ApiAssert;
@@ -15,7 +16,6 @@ import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -23,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,13 +51,11 @@ public class SysUserServiceImpl extends MinionServiceImpl<SysUserMapper, SysUser
 
     @Override
     public void createUser(SysUser sysUser) {
-        SysUserService proxy = (SysUserService) AopContext.currentProxy();
-        proxy.createUser(sysUser, null);
+        AopUtil.getCurrentProxy(SysUserService.class).createUser(sysUser, null);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    @CacheEvict(cacheNames = CACHE_NAME, key = "#sysUser.id")
     public void createUser(SysUser sysUser, List<Long> roles) {
         Integer count = this.lambdaQuery().eq(SysUser::getUsername, sysUser.getUsername()).count();
         ApiAssert.isFalse(ErrorCode.USERNAME_EXITED, count > 0);
@@ -75,7 +74,7 @@ public class SysUserServiceImpl extends MinionServiceImpl<SysUserMapper, SysUser
         ApiAssert.isFalse(ErrorCode.USERNAME_EXITED, count > 0);
         sysUser.setPassword(null);
         this.sysUserRoleService.updateUserRole(roles, sysUser.getId());
-        updateByIdAndReturn(sysUser);
+        AopUtil.getCurrentProxy(SysUserService.class).updateByIdAndReturn(sysUser);
     }
 
     @Override
@@ -99,6 +98,18 @@ public class SysUserServiceImpl extends MinionServiceImpl<SysUserMapper, SysUser
         return super.updateByIdAndReturn(entity);
     }
 
+
+    @Override
+    @CacheEvict(cacheNames = CACHE_NAME, key = "#entity.username")
+    public boolean updateById(SysUser entity) {
+        return super.updateById(entity);
+    }
+
+    @Override
+    @CachePut(cacheNames = CACHE_NAME, key = "#id")
+    public boolean removeById(Serializable id) {
+        return super.removeById(id);
+    }
 
 }
 

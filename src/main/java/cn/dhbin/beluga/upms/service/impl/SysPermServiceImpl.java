@@ -10,6 +10,7 @@ import cn.dhbin.beluga.upms.service.RequestMappingService;
 import cn.dhbin.beluga.upms.service.SysMenuPermService;
 import cn.dhbin.beluga.upms.service.SysPermService;
 import cn.dhbin.beluga.upms.service.SysRolePermService;
+import cn.dhbin.beluga.util.AopUtil;
 import cn.dhbin.minion.core.mybatis.model.PageModel;
 import cn.dhbin.minion.core.mybatis.service.MinionServiceImpl;
 import cn.hutool.core.util.StrUtil;
@@ -17,7 +18,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.RequiredArgsConstructor;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
@@ -57,10 +57,7 @@ public class SysPermServiceImpl extends MinionServiceImpl<SysPermMapper, SysPerm
     public List<SysPerm> getByRoleId(Long roleId) {
         return sysRolePermService.getByRoleId(roleId)
                 .stream()
-                .map(sysUserPerm -> {
-                    SysPermService sysPermService = (SysPermService) AopContext.currentProxy();
-                    return sysPermService.getById(sysUserPerm.getPid());
-                })
+                .map(sysUserPerm -> AopUtil.getCurrentProxy(SysPermService.class).getById(sysUserPerm.getPid()))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
@@ -70,7 +67,7 @@ public class SysPermServiceImpl extends MinionServiceImpl<SysPermMapper, SysPerm
         return sysMenuPermService.getByMenuId(menuId)
                 .stream()
                 .map(sysMenuPerm -> {
-                    SysPermService sysPermService = (SysPermService) AopContext.currentProxy();
+                    SysPermService sysPermService = AopUtil.getCurrentProxy(SysPermService.class);
                     return sysPermService.getById(sysMenuPerm.getPid());
                 })
                 .filter(Objects::nonNull)

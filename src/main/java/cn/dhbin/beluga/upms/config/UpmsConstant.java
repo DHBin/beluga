@@ -54,4 +54,15 @@ public interface UpmsConstant {
      */
     String DEFAULT_OWN = "未分类";
 
+    //
+    // ===========================
+    // 缓存key name
+    // ===========================
+    //
+
+    /**
+     * role
+     */
+    String CACHE_ROLE_PREFIX = "role";
+
 }
