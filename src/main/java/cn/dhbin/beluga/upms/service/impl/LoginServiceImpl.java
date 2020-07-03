@@ -8,6 +8,7 @@ import cn.dhbin.beluga.upms.entity.SysUserRole;
 import cn.dhbin.beluga.upms.exception.LoginFailedException;
 import cn.dhbin.beluga.upms.model.PermUser;
 import cn.dhbin.beluga.upms.service.*;
+import cn.dhbin.beluga.util.CacheUtil;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
 import lombok.RequiredArgsConstructor;
@@ -112,6 +113,6 @@ public class LoginServiceImpl implements LoginService {
     }
 
     private String buildCacheKey(String token) {
-        return UpmsConstant.AUTH_KEY_PREFIX + "::" + token;
+        return CacheUtil.buildCacheKey(UpmsConstant.AUTH_KEY_PREFIX, token);
     }
 }
