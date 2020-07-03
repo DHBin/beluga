@@ -1,11 +1,10 @@
 package cn.dhbin.beluga.config.security;
 
 import cn.dhbin.beluga.config.ConfigConstant;
-import cn.dhbin.beluga.upms.service.LoginService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -22,6 +21,7 @@ import org.springframework.security.web.header.HeaderWriterFilter;
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final String[] EXCLUDE_PATH = new String[]{
@@ -33,9 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/code"
     };
 
-    @Autowired
-    private LoginService loginService;
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -43,11 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .sessionManagement().disable()
                 .logout().disable()
-                .addFilterAfter(new TokenAuthenticationFilter(loginService), HeaderWriterFilter.class)
+                .addFilterAfter(new TokenAuthenticationFilter(), HeaderWriterFilter.class)
                 .authorizeRequests()
                 .antMatchers(EXCLUDE_PATH).permitAll()
                 .anyRequest().authenticated()
-                .and().headers().cacheControl().disable();
+                .and()
+                .headers().cacheControl().disable()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(new AuthenticationExceptionEntryPoint());
     }
 
     @Bean

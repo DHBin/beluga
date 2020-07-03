@@ -61,6 +61,7 @@ public class SysPermServiceImpl extends MinionServiceImpl<SysPermMapper, SysPerm
                     SysPermService sysPermService = (SysPermService) AopContext.currentProxy();
                     return sysPermService.getById(sysUserPerm.getPid());
                 })
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
@@ -72,6 +73,7 @@ public class SysPermServiceImpl extends MinionServiceImpl<SysPermMapper, SysPerm
                     SysPermService sysPermService = (SysPermService) AopContext.currentProxy();
                     return sysPermService.getById(sysMenuPerm.getPid());
                 })
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
     }
@@ -100,9 +102,12 @@ public class SysPermServiceImpl extends MinionServiceImpl<SysPermMapper, SysPerm
     @CacheEvict(cacheNames = CACHE_NAME, key = "'all'")
     @Transactional(rollbackFor = Exception.class)
     public void reload() {
+        Cache cache = Objects.requireNonNull(cacheManager.getCache(CACHE_NAME));
+        this.list().forEach(sysPerm -> {
+            cache.evict(sysPerm.getId());
+        });
         this.baseMapper.delete(new QueryWrapper<>());
         List<RequestMappingInfo> mappingInfos = requestMappingService.all();
-        Cache cache = Objects.requireNonNull(cacheManager.getCache(CACHE_NAME));
         List<SysPerm> sysPermList = mappingInfos.stream().map(requestMappingInfo -> {
             SysPerm sysPerm = new SysPerm();
             sysPerm.setId(requestMappingInfo.getId());

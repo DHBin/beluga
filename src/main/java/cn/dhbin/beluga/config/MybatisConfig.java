@@ -4,6 +4,7 @@ import cn.dhbin.beluga.util.SecurityUtil;
 import cn.dhbin.minion.core.common.IUserInfoProvider;
 import cn.dhbin.minion.core.mybatis.plugins.PerformanceInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @Slf4j
+@MapperScan("cn.dhbin.beluga.*.mapper")
 public class MybatisConfig {
 
     @Bean

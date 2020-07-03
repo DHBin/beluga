@@ -22,7 +22,7 @@ public class SecurityUtil {
      */
     public static PermUser getCurrentPermUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return (PermUser) authentication.getCredentials();
+        return (PermUser) authentication.getPrincipal();
     }
 
 
