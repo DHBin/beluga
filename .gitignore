@@ -34,4 +34,9 @@ build/
 ### VS Code ###
 .vscode/
 
+### 代码生成器 ###
 generate
+
+### h2 database ###
+*.mv.db
+*.trace.db

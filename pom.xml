@@ -168,5 +168,20 @@
                 </dependency>
             </dependencies>
         </profile>
+
+
+        <!-- h2 -->
+        <profile>
+            <id>h2</id>
+            <properties>
+                <project.active>h2</project.active>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
     </profiles>
 </project>
