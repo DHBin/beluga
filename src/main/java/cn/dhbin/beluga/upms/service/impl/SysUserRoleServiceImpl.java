@@ -20,19 +20,19 @@ public class SysUserRoleServiceImpl extends MinionServiceImpl<SysUserRoleMapper,
 
     @Override
     public List<SysUserRole> getByUserId(Long userId) {
-        return lambdaQuery().eq(SysUserRole::getUid, userId).list();
+        return lambdaQuery().eq(SysUserRole::getUserId, userId).list();
     }
 
     @Override
     public boolean hasRole(Long userId, Long roleId) {
         return this.lambdaQuery().eq(SysUserRole::getRid, roleId)
-                .eq(SysUserRole::getUid, userId)
+                .eq(SysUserRole::getUserId, userId)
                 .count() != 0;
     }
 
     @Override
     public void removeByUid(Long userId) {
-        this.remove(new LambdaQueryWrapper<SysUserRole>().eq(SysUserRole::getUid, userId));
+        this.remove(new LambdaQueryWrapper<SysUserRole>().eq(SysUserRole::getUserId, userId));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class SysUserRoleServiceImpl extends MinionServiceImpl<SysUserRoleMapper,
                 .map(rid -> {
                     SysUserRole sysUserRole = new SysUserRole();
                     sysUserRole.setRid(rid);
-                    sysUserRole.setUid(userId);
+                    sysUserRole.setUserId(userId);
                     return sysUserRole;
                 }).collect(Collectors.toList());
         this.removeByUid(userId);

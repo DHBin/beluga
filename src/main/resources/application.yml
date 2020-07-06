@@ -1,14 +1,11 @@
 spring:
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${BELUGA_DB_USERNAME:root}
-    password: ${BELUGA_DB_PASSWORD:root}
-    url: jdbc:mysql://${BELUGA_DB_HOST:localhost}:${BELUGA_DB_PORT:3306}/${BELUGA_DB_NAME:beluga}?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+  profiles:
+    active: @project.active@
   redis:
     host: ${BELUGA_REDIS_HOST:localhost}
     password: ${BELUGA_REDIS_PASSWORD:}
 swagger:
   base-package: cn.dhbin.beluga
+  version: @project.version@
 mybatis-plus:
   type-enums-package: cn.dhbin.beluga.*.model.enums
