@@ -4,4 +4,6 @@ spring:
     driver-class-name: org.h2.Driver
     username: ${BELUGA_DB_USERNAME:sa}
     password: ${BELUGA_DB_PASSWORD:sa}
-    url: jdbc:h2:file:${BELUGA_DB_NAME:./beluga}
+    url: jdbc:h2:mem:${BELUGA_DB_NAME:beluga}
+    schema: classpath:db/h2-1-schemas.sql
+    data: classpath:db/h2-2-data.sql
