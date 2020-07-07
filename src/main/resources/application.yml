@@ -4,6 +4,8 @@ spring:
   redis:
     host: ${BELUGA_REDIS_HOST:localhost}
     password: ${BELUGA_REDIS_PASSWORD:}
+  cache:
+    type: ${BELUGA_CACHE_TYPE:ehcache}
 swagger:
   base-package: cn.dhbin.beluga
   version: @project.version@

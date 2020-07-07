@@ -1,18 +1,16 @@
 package cn.dhbin.beluga.upms.service.impl;
 
-import cn.dhbin.beluga.upms.config.UpmsConstant;
 import cn.dhbin.beluga.upms.entity.SysPerm;
 import cn.dhbin.beluga.upms.entity.SysRole;
 import cn.dhbin.beluga.upms.entity.SysUser;
 import cn.dhbin.beluga.upms.entity.SysUserRole;
 import cn.dhbin.beluga.upms.exception.LoginFailedException;
+import cn.dhbin.beluga.upms.manager.TokenManager;
 import cn.dhbin.beluga.upms.model.PermUser;
 import cn.dhbin.beluga.upms.service.*;
-import cn.dhbin.beluga.util.CacheUtil;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +19,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -44,7 +41,7 @@ public class LoginServiceImpl implements LoginService {
 
     private final SysRoleService sysRoleService;
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final TokenManager<PermUser> tokenManager;
 
 
     @Override
@@ -60,14 +57,14 @@ public class LoginServiceImpl implements LoginService {
         String token = UUID.fastUUID().toString(true);
         permUser.setToken(token);
         // 存进缓存
-        redisTemplate.opsForValue().set(buildCacheKey(token), permUser, UpmsConstant.AUTH_PERIOD_OF_VALIDITY, TimeUnit.SECONDS);
+        tokenManager.save(token, permUser);
         return token;
     }
 
     @Override
     @Nullable
     public PermUser getPermUser(String token) {
-        PermUser permUser = (PermUser) redisTemplate.opsForValue().get(buildCacheKey(token));
+        PermUser permUser = tokenManager.load(token);
         if (permUser == null) {
             return null;
         }
@@ -76,7 +73,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public void logout(String token) {
-        redisTemplate.delete(buildCacheKey(token));
+        tokenManager.remove(token);
     }
 
     private PermUser buildPermUser(@NonNull SysUser sysUser) {
@@ -112,7 +109,4 @@ public class LoginServiceImpl implements LoginService {
         return permUser;
     }
 
-    private String buildCacheKey(String token) {
-        return CacheUtil.buildCacheKey(UpmsConstant.AUTH_KEY_PREFIX, token);
-    }
 }
