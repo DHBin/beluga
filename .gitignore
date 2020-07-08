@@ -1,42 +1,7 @@
-HELP.md
-target/
-!**/src/main/**
-!**/src/test/**
+### yarn ###
+yarn.lock
 
-### maven ###
-.mvn
-mvnw
-mvnw.cmd
+### npm ###
+package-lock.json
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-
-### VS Code ###
-.vscode/
-
-### 代码生成器 ###
-generate
-
-### h2 database ###
-*.mv.db
-*.trace.db
+node_modules

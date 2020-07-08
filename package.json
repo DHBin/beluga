@@ -1,0 +1,18 @@
+{
+  "name": "BELUGA",
+  "version": "1.0.0",
+  "description": "快速开发脚手架",
+  "main": "index.js",
+  "repository": "https://gitee.com/FYMD/beluga.git",
+  "author": "DHB <xx158@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@vuepress/plugin-active-header-links": "^1.5.2",
+    "vuepress": "^1.5.2",
+    "vuepress-plugin-smooth-scroll": "^0.0.9"
+  },
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  }
+}
