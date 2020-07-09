@@ -3,8 +3,17 @@
 ## 后端
 
 ```shell
+# 拉取core包
+git clone https://gitee.com/FYMD/minion-core.git
+
+cd minion-core
+# 打包进本地maven仓库
+mvn clean install
+
 # 拉取代码
 git clone https://gitee.com/FYMD/beluga.git
+
+cd beluga
 # 运行
 mvn spring-boot:run -Ph2
 ```
