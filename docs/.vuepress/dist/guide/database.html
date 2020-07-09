@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>切换数据库 | Beluga</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    <link rel="icon" href="/beluga/logo.png">
+    <meta name="description" content="Beluga 快速开发脚手架">
+    <link rel="preload" href="/beluga/assets/css/0.styles.ad857550.css" as="style"><link rel="preload" href="/beluga/assets/js/app.b22ef495.js" as="script"><link rel="preload" href="/beluga/assets/js/2.d4fd6bb3.js" as="script"><link rel="preload" href="/beluga/assets/js/8.0d902917.js" as="script"><link rel="prefetch" href="/beluga/assets/js/10.f521a6af.js"><link rel="prefetch" href="/beluga/assets/js/11.8629cd5d.js"><link rel="prefetch" href="/beluga/assets/js/3.eccec794.js"><link rel="prefetch" href="/beluga/assets/js/4.3517de2a.js"><link rel="prefetch" href="/beluga/assets/js/5.629fe7cb.js"><link rel="prefetch" href="/beluga/assets/js/6.dbff4729.js"><link rel="prefetch" href="/beluga/assets/js/7.bbdd1be1.js"><link rel="prefetch" href="/beluga/assets/js/9.e28178f0.js">
+    <link rel="stylesheet" href="/beluga/assets/css/0.styles.ad857550.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/beluga/" class="home-link router-link-active"><!----> <span class="site-name">Beluga</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/beluga/guide/" class="nav-link router-link-active">
+  指南
+</a></div><div class="nav-item"><a href="https://gitee.com/FYMD/beluga" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Gitee
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/beluga/guide/" class="nav-link router-link-active">
+  指南
+</a></div><div class="nav-item"><a href="https://gitee.com/FYMD/beluga" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Gitee
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>指南</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/beluga/guide/" aria-current="page" class="sidebar-link">简介</a></li><li><a href="/beluga/guide/quick-start.html" class="sidebar-link">快速开始</a></li><li><a href="/beluga/guide/structure.html" class="sidebar-link">项目结构</a></li><li><a href="/beluga/guide/database.html" aria-current="page" class="active sidebar-link">切换数据库</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/beluga/guide/database.html#mysql" class="sidebar-link">Mysql</a></li><li class="sidebar-sub-header"><a href="/beluga/guide/database.html#oracle" class="sidebar-link">Oracle</a></li><li class="sidebar-sub-header"><a href="/beluga/guide/database.html#添加其它数据库" class="sidebar-link">添加其它数据库</a></li></ul></li><li><a href="/beluga/guide/cache.html" class="sidebar-link">切换缓存框架</a></li><li><a href="/beluga/guide/deploy.html" class="sidebar-link">部署</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="切换数据库"><a href="#切换数据库" class="header-anchor">#</a> 切换数据库</h1> <p>目前提供mysql、oracle、h2的sql文件，但是理论上是支持所有mybatis支持的数据库的。</p> <p>默认是<code>h2</code></p> <h2 id="mysql"><a href="#mysql" class="header-anchor">#</a> Mysql</h2> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">-- 创建数据库</span>
+<span class="token keyword">create</span> <span class="token keyword">database</span> beluga<span class="token punctuation">;</span>
+</code></pre></div><ol><li><p>按顺序导入<code>db</code>目录下的<code>mysql-1-schemas.sql</code>、<code>mysql-2-data.sql</code></p></li> <li><p>后端项目maven切换profile为mysql，idea可以在右侧的maven栏中切换</p></li> <li><p>提供数据库的配置信息，在环境变量中添加以下变量（或者直接修改<code>application-mysql.yml</code>）</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 数据库用户名，默认是root</span>
+<span class="token assign-left variable">BELUGA_DB_USERNAME</span><span class="token operator">=</span>root
+<span class="token comment"># 数据库密码，默认是root</span>
+<span class="token assign-left variable">BELUGA_DB_PASSWORD</span><span class="token operator">=</span>root
+<span class="token comment"># 数据库host，默认是localhost</span>
+<span class="token assign-left variable">BELUGA_DB_HOST</span><span class="token operator">=</span>localhost
+<span class="token comment"># 数据库端口，默认是3306</span>
+<span class="token assign-left variable">BELUGA_DB_PORT</span><span class="token operator">=</span><span class="token number">3306</span>
+<span class="token comment"># 数据库名，默认是beluga</span>
+<span class="token assign-left variable">BELUGA_DB_NAME</span><span class="token operator">=</span>beluga
+</code></pre></div></li></ol> <h2 id="oracle"><a href="#oracle" class="header-anchor">#</a> Oracle</h2> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">-- 创建数据库</span>
+<span class="token keyword">create</span> <span class="token keyword">database</span> beluga<span class="token punctuation">;</span>
+</code></pre></div><ol><li><p>按顺序导入<code>db</code>目录下的<code>oracle-1-schemas.sql</code>、<code>oracle-2-data.sql</code></p></li> <li><p>后端项目maven切换profile为oracle，idea可以在右侧的maven栏中切换</p></li> <li><p>提供数据库的配置信息，在环境变量中添加以下变量（或者直接修改<code>application-oracle.yml</code>）</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 数据库用户名，默认是root</span>
+<span class="token assign-left variable">BELUGA_DB_USERNAME</span><span class="token operator">=</span>root
+<span class="token comment"># 数据库密码，默认是root</span>
+<span class="token assign-left variable">BELUGA_DB_PASSWORD</span><span class="token operator">=</span>root
+<span class="token comment"># 数据库host，默认是localhost</span>
+<span class="token assign-left variable">BELUGA_DB_HOST</span><span class="token operator">=</span>localhost
+<span class="token comment"># 数据库端口，默认是1521</span>
+<span class="token assign-left variable">BELUGA_DB_PORT</span><span class="token operator">=</span><span class="token number">1521</span>
+<span class="token comment"># 数据库名，默认是beluga</span>
+<span class="token assign-left variable">BELUGA_DB_NAME</span><span class="token operator">=</span>beluga
+</code></pre></div></li></ol> <h2 id="添加其它数据库"><a href="#添加其它数据库" class="header-anchor">#</a> 添加其它数据库</h2> <ol><li><p>参考<code>schemas</code>、<code>data</code>编写创建数据表和插入数据语句</p></li> <li><p>修改pom.xml，添加profile，例子：</p> <div class="language-xml extra-class"><pre class="language-xml"><code><span class="token comment">&lt;!-- mysql --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>profile</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>id</span><span class="token punctuation">&gt;</span></span>mysql<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>id</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activation</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>activeByDefault</span><span class="token punctuation">&gt;</span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activeByDefault</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>activation</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>project.active</span><span class="token punctuation">&gt;</span></span>mysql<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>project.active</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!-- 数据库驱动 --&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>mysql<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>mysql-connector-java<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependencies</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>profile</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></li></ol></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/beluga/guide/structure.html" class="prev">
+        项目结构
+      </a></span> <span class="next"><a href="/beluga/guide/cache.html">
+        切换缓存框架
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/beluga/assets/js/app.b22ef495.js" defer></script><script src="/beluga/assets/js/2.d4fd6bb3.js" defer></script><script src="/beluga/assets/js/8.0d902917.js" defer></script>
+  </body>
+</html>
