@@ -4,4 +4,4 @@ spring:
     driver-class-name: oracle.jdbc.OracleDriver
     username: ${BELUGA_DB_USERNAME:root}
     password: ${BELUGA_DB_PASSWORD:root}
-    url: jdbc:oracle:thin:@//${BELUGA_DB_HOST:localhost}:${BELUGA_DB_PORT:3306}/${BELUGA_DB_NAME:beluga}
+    url: jdbc:oracle:thin:@//${BELUGA_DB_HOST:localhost}:${BELUGA_DB_PORT:1521}/${BELUGA_DB_NAME:beluga}
