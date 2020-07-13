@@ -48,6 +48,11 @@
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-swagger</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-generate</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- minion -->
 
         <!-- 验证码 -->
