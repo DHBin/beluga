@@ -21,7 +21,7 @@ function getGuideSidebar() {
     {
       title: '指南',
       collapsable: false,
-      children: ["", "quick-start", "structure", "database", "cache", "deploy"]
+      children: ["", "quick-start", "structure", "database", "cache", "code-generator", "deploy"]
     }
   ]
 }
