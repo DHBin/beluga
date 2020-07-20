@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: @project.active@
+    active: @projectActive@
   redis:
     host: ${BELUGA_REDIS_HOST:localhost}
     password: ${BELUGA_REDIS_PASSWORD:}
@@ -8,6 +8,6 @@ spring:
     type: ${BELUGA_CACHE_TYPE:ehcache}
 swagger:
   base-package: cn.dhbin.beluga
-  version: @project.version@
+  version: @projectVersion@
 mybatis-plus:
   type-enums-package: cn.dhbin.beluga.*.model.enums

@@ -1,0 +1,98 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+
+group = 'cn.dhbin'
+version = '1.0.0-SNAPSHOT'
+description = 'beluga'
+sourceCompatibility = '1.8'
+def profileName = System.getProperty("profile") ?: "h2"
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'cn.dhbin:minion-core:1.0.0'
+    }
+}
+dependencies {
+    implementation 'cn.dhbin:minion-core-restful'
+    implementation 'cn.dhbin:minion-core-mybatis'
+    implementation 'cn.dhbin:minion-core-swagger'
+    implementation 'com.github.whvcse:easy-captcha:1.6.2'
+    implementation 'com.github.xiaoymin:knife4j-spring-ui:2.0.4'
+    implementation 'net.sf.ehcache:ehcache:2.10.6'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+
+    compileOnly 'org.projectlombok:lombok'
+
+    def isBuild = containBuild()
+    logger.lifecycle('is build command: ' + isBuild)
+    // 判断是否包含build命令，如果包含则动态选择数据库依赖
+    if (isBuild) {
+        if (profileName == 'h2') {
+            runtimeOnly 'com.h2database:h2'
+        } else if (profileName == 'mysql') {
+            runtimeOnly 'mysql:mysql-connector-java'
+        } else if (profileName == 'oracle') {
+            runtimeOnly 'com.oracle.ojdbc:ojdbc8'
+            runtimeOnly 'cn.easyproject:orai18n:12.1.0.2.0'
+        }
+    } else {
+        runtimeOnly 'com.h2database:h2'
+        runtimeOnly 'mysql:mysql-connector-java'
+        runtimeOnly 'com.oracle.ojdbc:ojdbc8'
+        runtimeOnly 'cn.easyproject:orai18n:12.1.0.2.0'
+    }
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'cn.dhbin:minion-core-generate'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+
+
+processResources {
+    filter ReplaceTokens, tokens: [projectActive: profileName, projectVersion: version]
+}
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+/**
+ * 判断是否包含build参数
+ * @return true-包含 false-不包含
+ */
+def containBuild() {
+    return gradle.startParameter.getTaskRequests().get(0).getArgs().contains('build')
+}
