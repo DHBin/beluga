@@ -34,7 +34,7 @@ dependencyManagement {
 def databaseDepend = [
         'h2': ['com.h2database:h2'],
         'mysql': ['mysql:mysql-connector-java'],
-        'orcale': ['com.oracle.ojdbc:ojdbc8', 'cn.easyproject:orai18n:12.1.0.2.0']
+        'oracle': ['com.oracle.ojdbc:ojdbc8', 'cn.easyproject:orai18n:12.1.0.2.0']
 ]
 
 dependencies {
