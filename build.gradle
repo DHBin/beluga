@@ -30,6 +30,13 @@ dependencyManagement {
         mavenBom 'cn.dhbin:minion-core:1.0.0'
     }
 }
+
+def databaseDepend = [
+        'h2': ['com.h2database:h2'],
+        'mysql': ['mysql:mysql-connector-java'],
+        'orcale': ['com.oracle.ojdbc:ojdbc8', 'cn.easyproject:orai18n:12.1.0.2.0']
+]
+
 dependencies {
     implementation 'cn.dhbin:minion-core-restful'
     implementation 'cn.dhbin:minion-core-mybatis'
@@ -50,19 +57,9 @@ dependencies {
     logger.lifecycle('is build command: ' + isBuild)
     // 判断是否包含build命令，如果包含则动态选择数据库依赖
     if (isBuild) {
-        if (profileName == 'h2') {
-            runtimeOnly 'com.h2database:h2'
-        } else if (profileName == 'mysql') {
-            runtimeOnly 'mysql:mysql-connector-java'
-        } else if (profileName == 'oracle') {
-            runtimeOnly 'com.oracle.ojdbc:ojdbc8'
-            runtimeOnly 'cn.easyproject:orai18n:12.1.0.2.0'
-        }
+        runtimeOnly(databaseDepend[profileName])
     } else {
-        runtimeOnly 'com.h2database:h2'
-        runtimeOnly 'mysql:mysql-connector-java'
-        runtimeOnly 'com.oracle.ojdbc:ojdbc8'
-        runtimeOnly 'cn.easyproject:orai18n:12.1.0.2.0'
+        databaseDepend.values().forEach({depend -> runtimeOnly(depend)})
     }
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
