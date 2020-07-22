@@ -86,6 +86,10 @@ test {
     useJUnitPlatform()
 }
 
+bootJar {
+    layered()
+}
+
 /**
  * 判断是否包含build参数
  * @return true-包含 false-不包含
