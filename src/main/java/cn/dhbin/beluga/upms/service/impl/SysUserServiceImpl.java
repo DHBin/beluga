@@ -22,6 +22,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.io.Serializable;
 import java.util.List;
@@ -90,6 +91,16 @@ public class SysUserServiceImpl extends MinionServiceImpl<SysUserMapper, SysUser
                     dto.setPassword("****");
                     return dto;
                 });
+    }
+
+    @Override
+    @CacheEvict(cacheNames = CACHE_NAME, key = "#username")
+    public void changePassword(String username, String newPassword) {
+        Assert.notNull(username, "username must not null.");
+        Assert.notNull(newPassword, "newPassword must not null.");
+        this.lambdaUpdate().set(SysUser::getPassword, passwordEncoder.encode(newPassword))
+                .eq(SysUser::getUsername, username)
+                .update();
     }
 
     @Override

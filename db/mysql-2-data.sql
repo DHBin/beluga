@@ -72,6 +72,7 @@ INSERT INTO sys_perm VALUES ('b9bdbd66666e615c5635c4d232fe84ab', '菜单', '更�
 INSERT INTO sys_perm VALUES ('da3fa36b04b33fc4c24a2192fa98a129', '权限', '分页获取角色', '', '/upms/role', 'GET', 'sys_role_list', '2020-07-04 23:01:05', '2020-07-04 23:01:05', 1, 1);
 INSERT INTO sys_perm VALUES ('dace5c3dc2e1b2de682bb3b34f5297d5', '权限', '删除角色', '', '/upms/role/{id:\\d+}', 'DELETE', 'sys_role_delete', '2020-07-04 23:01:05', '2020-07-04 23:01:05', 1, 1);
 INSERT INTO sys_perm VALUES ('e77ff0adab18c95f75e13d477b569d69', '权限', '获取所有角色', '', '/upms/role/all', 'GET', 'sys_role_all', '2020-07-04 23:01:05', '2020-07-04 23:01:05', 1, 1);
+INSERT INTO sys_perm VALUES ('a9332353eb99d11721c8e91c79f73ce5', '用户', '修改密码', '', '/upms/user/changePassword', 'POST', '', '2020-07-04 23:01:05', '2020-07-04 23:01:05', 1, 1);
 
 -- 角色
 INSERT INTO `sys_role` VALUES (1, '管理员', 'role_admin', '管理员（不要删除哦）', '2020-03-21 14:01:31', '2020-03-21 22:01:32', 1, 1);

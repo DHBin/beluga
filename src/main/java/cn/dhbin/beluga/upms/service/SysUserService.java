@@ -56,5 +56,12 @@ public interface SysUserService extends IMinionService<SysUser> {
      */
     IPage<UserDto> list(PageModel<SysUser> pageModel);
 
+    /**
+     * 修改用户密码，不判断用户是否存在
+     *
+     * @param username    用户名
+     * @param newPassword 新用户密码
+     */
+    void changePassword(String username, String newPassword);
 
 }
