@@ -74,7 +74,10 @@ dependencies {
 
 
 processResources {
-    filter ReplaceTokens, tokens: [projectActive: profileName, projectVersion: version]
+    // 替换yml文件的变量
+    filesMatching('*.yml') {
+        filter ReplaceTokens, tokens: [projectActive: profileName, projectVersion: version]
+    }
 }
 
 
