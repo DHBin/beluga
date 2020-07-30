@@ -26,6 +26,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author donghaibin
  * @date 2020/1/4
@@ -103,6 +105,13 @@ public class SysUserController extends RestfulController {
     @PreAuthorize("hasAuthority('sys_user_delete')")
     public ApiResponse<?> delete(@PathVariable Long id) {
         return created(this.sysUserService.removeById(id));
+    }
+
+    @PostMapping("/changePassword")
+    @ApiOperation(value = "修改密码")
+    public ApiResponse<?> changePassword(@Validated @NotBlank(message = "新密码不能为空") String newPassword) {
+        this.sysUserService.changePassword(SecurityUtil.getCurrentPermUser().getUsername(), newPassword);
+        return created();
     }
 
 }
