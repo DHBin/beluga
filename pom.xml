@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.1.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>cn.dhbin</groupId>
+    <artifactId>beluga</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>beluga</name>
+    <description>beluga后台脚手架</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <minion.version>1.0.0</minion.version>
+        <orai18n.version>12.1.0.2.0</orai18n.version>
+        <easy-captcha.version>1.6.2</easy-captcha.version>
+        <projectVersion>${project.version}</projectVersion>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--minion-->
+            <dependency>
+                <groupId>cn.dhbin</groupId>
+                <artifactId>minion-core</artifactId>
+                <version>${minion.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- minion -->
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-restful</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-swagger</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.dhbin</groupId>
+            <artifactId>minion-core-generate</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- minion -->
+
+        <!-- 验证码 -->
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+            <version>${easy-captcha.version}</version>
+        </dependency>
+
+        <!--文档-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-ui</artifactId>
+        </dependency>
+
+        <!-- ehcache缓存 -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <layers>
+                        <enabled>true</enabled>
+                    </layers>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <profiles>
+        <!-- mysql -->
+        <profile>
+            <id>mysql</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <projectActive>mysql</projectActive>
+            </properties>
+            <dependencies>
+                <!--mysql-->
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <!-- oracle -->
+        <profile>
+            <id>oracle</id>
+            <properties>
+                <projectActive>oracle</projectActive>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.oracle.ojdbc</groupId>
+                    <artifactId>ojdbc8</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>cn.easyproject</groupId>
+                    <artifactId>orai18n</artifactId>
+                    <version>${orai18n.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+
+        <!-- h2 -->
+        <profile>
+            <id>h2</id>
+            <properties>
+                <projectActive>h2</projectActive>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+</project>
