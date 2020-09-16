@@ -16,42 +16,35 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <minion.version>1.0.0</minion.version>
+        <minion.version>1.0.2-SNAPSHOT</minion.version>
         <orai18n.version>12.1.0.2.0</orai18n.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
+        <mybatis-plus.version>3.4.0</mybatis-plus.version>
+        <knife4j.version>2.0.4</knife4j.version>
         <projectVersion>${project.version}</projectVersion>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <!--minion-->
-            <dependency>
-                <groupId>cn.dhbin</groupId>
-                <artifactId>minion-core</artifactId>
-                <version>${minion.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <!-- minion -->
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-restful</artifactId>
+            <version>${minion.version}</version>
         </dependency>
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-mybatis</artifactId>
+            <version>${minion.version}</version>
         </dependency>
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-swagger</artifactId>
+            <version>${minion.version}</version>
         </dependency>
         <dependency>
             <groupId>cn.dhbin</groupId>
             <artifactId>minion-core-generate</artifactId>
+            <version>${minion.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- minion -->
@@ -67,6 +60,7 @@
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-ui</artifactId>
+            <version>${knife4j.version}</version>
         </dependency>
 
         <!-- ehcache缓存 -->
@@ -79,6 +73,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
@@ -107,11 +106,26 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis-plus.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -150,9 +164,6 @@
         <!-- mysql -->
         <profile>
             <id>mysql</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <projectActive>mysql</projectActive>
             </properties>
@@ -188,6 +199,9 @@
         <!-- h2 -->
         <profile>
             <id>h2</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <projectActive>h2</projectActive>
             </properties>
@@ -199,4 +213,11 @@
             </dependencies>
         </profile>
     </profiles>
+
+    <repositories>
+        <repository>
+            <id>snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
 </project>

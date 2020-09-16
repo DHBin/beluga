@@ -23,33 +23,38 @@ configurations {
 repositories {
     mavenLocal()
     mavenCentral()
-}
-
-dependencyManagement {
-    imports {
-        mavenBom 'cn.dhbin:minion-core:1.0.0'
-    }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
 def databaseDepend = [
-        'h2': ['com.h2database:h2'],
-        'mysql': ['mysql:mysql-connector-java'],
+        'h2'    : ['com.h2database:h2'],
+        'mysql' : ['mysql:mysql-connector-java'],
         'oracle': ['com.oracle.ojdbc:ojdbc8', 'cn.easyproject:orai18n:12.1.0.2.0']
 ]
 
+def libVersion = [
+        'minion-core': '1.0.2-SNAPSHOT',
+        'easy-captcha': '1.6.2',
+        'mybatis-plus': '3.4.0',
+        'knife4j': '2.0.4',
+        'ehcache': '2.10.6',
+]
+
 dependencies {
-    implementation 'cn.dhbin:minion-core-restful'
-    implementation 'cn.dhbin:minion-core-mybatis'
-    implementation 'cn.dhbin:minion-core-swagger'
-    implementation 'com.github.whvcse:easy-captcha:1.6.2'
-    implementation 'com.github.xiaoymin:knife4j-spring-ui:2.0.4'
-    implementation 'net.sf.ehcache:ehcache:2.10.6'
-    implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-aop'
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation "cn.dhbin:minion-core-restful:${libVersion['minion-core']}"
+    implementation "cn.dhbin:minion-core-mybatis:${libVersion['minion-core']}"
+    implementation "cn.dhbin:minion-core-swagger:${libVersion['minion-core']}"
+    implementation "com.github.whvcse:easy-captcha:${libVersion['easy-captcha']}"
+    implementation "com.github.xiaoymin:knife4j-spring-ui:${libVersion['knife4j']}"
+    implementation "net.sf.ehcache:ehcache:${libVersion['ehcache']}"
+    implementation "org.springframework.boot:spring-boot-starter"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation "org.springframework.boot:spring-boot-starter-aop"
+    implementation "org.springframework.boot:spring-boot-starter-data-redis"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springframework.boot:spring-boot-configuration-processor"
+    implementation "com.baomidou:mybatis-plus:${libVersion['mybatis-plus']}"
 
     compileOnly 'org.projectlombok:lombok'
 
@@ -59,18 +64,18 @@ dependencies {
     if (isBuild) {
         runtimeOnly(databaseDepend[profileName])
     } else {
-        databaseDepend.values().forEach({depend -> runtimeOnly(depend)})
+        databaseDepend.values().forEach({ depend -> runtimeOnly(depend) })
     }
 
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    annotationProcessor "org.projectlombok:lombok"
 
-    testImplementation 'cn.dhbin:minion-core-generate'
+    testImplementation "com.baomidou:mybatis-plus-generator:${libVersion['mybatis-plus']}"
+    testImplementation "cn.dhbin:minion-core-generate:${libVersion['minion-core']}"
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 }
-
 
 
 processResources {
