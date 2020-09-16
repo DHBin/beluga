@@ -24,7 +24,7 @@ public class SysUser extends BaseEntity {
     /**
      * 用户名
      */
-    @TableId(value = "username")
+    @TableField(value = "username")
     private String username;
 
     /**
