@@ -93,17 +93,17 @@ CREATE TABLE sys_role_perm
 -- 用户表
 CREATE TABLE sys_user
 (
-    id          number(20)   NOT NULL,
-    username    varchar(20)  NOT NULL,
-    phone       varchar(20)  NOT NULL,
-    email       varchar(100) NOT NULL,
-    password    varchar(255) NOT NULL,
-    dept_id     number(20)   NULL,
-    create_time date         NOT NULL,
-    update_time date         NULL,
-    create_uid  number(20)   NOT NULL,
-    update_uid  number(20)   NULL,
-    deleted     number(1)    NOT NULL,
+    id          number(20)          NOT NULL,
+    username    varchar(20)         NOT NULL,
+    phone       varchar(20)         NOT NULL,
+    email       varchar(100)        NOT NULL,
+    password    varchar(255)        NOT NULL,
+    dept_id     number(20)          NULL,
+    create_time date                NOT NULL,
+    update_time date                NULL,
+    create_uid  number(20)          NOT NULL,
+    update_uid  number(20)          NULL,
+    deleted     number(1) DEFAULT 0 NOT NULL,
     PRIMARY KEY (id)
 );
 

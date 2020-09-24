@@ -113,7 +113,7 @@ CREATE TABLE `sys_user`
 CREATE TABLE `sys_user_role`
 (
     `id`          bigint(20) UNSIGNED NOT NULL COMMENT 'id',
-    `user_id`         bigint(20) UNSIGNED NOT NULL COMMENT '用户id',
+    `user_id`     bigint(20) UNSIGNED NOT NULL COMMENT '用户id',
     `rid`         bigint(20) UNSIGNED NOT NULL COMMENT '角色id',
     `create_time` datetime            NOT NULL COMMENT '创建时间',
     `update_time` datetime            NULL COMMENT '更新时间',

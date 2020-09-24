@@ -29,8 +29,8 @@ CREATE TABLE sys_perm
     path           varchar(256) NULL,
     method         varchar(256) NULL,
     authorizations varchar(256) NULL,
-    create_time    datetime         NOT NULL,
-    update_time    datetime         NULL,
+    create_time    datetime     NOT NULL,
+    update_time    datetime     NULL,
     create_uid     bigint(20)   NOT NULL,
     update_uid     bigint(20)   NULL,
     PRIMARY KEY (id)
@@ -103,7 +103,7 @@ CREATE TABLE sys_user
     update_time datetime     NULL,
     create_uid  bigint(20)   NOT NULL,
     update_uid  bigint(20)   NULL,
-    deleted     tinyint(1)   NOT NULL,
+    deleted     tinyint(1)   NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 );
 

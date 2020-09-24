@@ -11,3 +11,8 @@ swagger:
   version: @projectVersion@
 mybatis-plus:
   type-enums-package: cn.dhbin.beluga.*.model.enums
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
