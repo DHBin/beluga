@@ -32,6 +32,14 @@ public interface LoginService {
     PermUser getPermUser(String token);
 
     /**
+     * 刷新token
+     *
+     * @param oldToken 旧的token
+     * @return 失败返回null
+     */
+    PermUser refreshToken(String oldToken);
+
+    /**
      * 登出，移除缓存中的登录信息
      *
      * @param token token

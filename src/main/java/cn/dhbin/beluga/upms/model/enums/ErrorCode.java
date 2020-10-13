@@ -25,7 +25,14 @@ public enum ErrorCode implements IErrorCode<Object> {
     /**
      * 验证码不正确
      */
-    CAPTCHA_INVALID(10_00_03, "验证码不正确");
+    CAPTCHA_INVALID(10_00_03, "验证码不正确"),
+
+    /**
+     * 刷新token失败
+     */
+    REFRESH_TOKEN_ERROR(10_00_4, "刷新token失败"),
+
+    ;
 
     private final Integer status;
 

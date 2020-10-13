@@ -72,6 +72,19 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
+    public PermUser refreshToken(String oldToken) {
+        PermUser permUser = tokenManager.load(oldToken);
+        if (permUser == null) {
+            return null;
+        }
+        String newToken = UUID.fastUUID().toString(true);
+        permUser.setToken(newToken);
+        tokenManager.save(newToken, permUser);
+        tokenManager.remove(oldToken);
+        return permUser;
+    }
+
+    @Override
     public void logout(String token) {
         tokenManager.remove(token);
     }

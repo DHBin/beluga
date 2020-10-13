@@ -67,6 +67,18 @@ public class SysUserController extends RestfulController {
         }
     }
 
+    @PostMapping("/refreshToken")
+    @ApiOperation(value = "刷新token", notes = "执行成功后，旧的token失效")
+    public ApiResponse<?> refreshToken() {
+        PermUser currentPermUser = SecurityUtil.getCurrentPermUser();
+        PermUser newPermUser = this.loginService.refreshToken(currentPermUser.getToken());
+        if (newPermUser == null) {
+            return ApiResponse.fail(ErrorCode.REFRESH_TOKEN_ERROR);
+        } else {
+            return ok(newPermUser.getToken());
+        }
+    }
+
     @GetMapping("/logout")
     @ApiOperation(value = "登出")
     public ApiResponse<?> logout() {
