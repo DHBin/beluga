@@ -1,6 +1,5 @@
 package cn.dhbin.beluga.generator;
 
-import cn.dhbin.minion.core.generate.MinionVelocityTemplateEngine;
 import cn.dhbin.minion.core.generate.config.MinionGeneratorConfig;
 import cn.dhbin.minion.core.generate.config.MinionGlobalConfig;
 import cn.dhbin.minion.core.generate.config.MinionInjectionConfig;
@@ -54,15 +53,15 @@ public class CodeGenerate {
         // 策略配置
         MinionStrategyConfig strategy = MinionGeneratorConfig.strategyConfig();
         // start 如果字段包含create_time、update_time、create_uid、update_uid，可以设置Entity父类为BaseEntity
-//        strategy.setSuperEntityClass("cn.dhbin.minion.core.common.entity.BaseEntity");
-//        strategy.setSuperEntityColumns("create_time", "update_time", "create_uid", "update_uid");
+        strategy.setSuperEntityClass("cn.dhbin.minion.core.common.entity.BaseEntity");
+        strategy.setSuperEntityColumns("create_time", "update_time", "create_uid", "update_uid");
         // 使用Spring Security注解鉴权
         strategy.setSpringSecurityAnnotation(true);
         // end
         strategy.setTablePrefix("TEST_");
         strategy.setInclude(scanner("表名").split(","));
         mpg.setStrategy(strategy);
-        mpg.setTemplateEngine(new MinionVelocityTemplateEngine());
+        mpg.setTemplateEngine(new BelugaVelocityTemplateEngine());
         mpg.execute();
     }
 

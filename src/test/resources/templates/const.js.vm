@@ -1,0 +1,27 @@
+export const tableOption = {
+    border: true,
+    index: true,
+    indexLabel: '序号',
+    stripe: true,
+    menuAlign: 'center',
+    align: 'center',
+    column: [
+        #foreach($field in $table.fields)
+            #if($field.keyFlag == false)
+            {
+                label: '${field.comment}',
+                prop: '${field.propertyName}',
+            #if($field.type == "TIMESTAMP")
+                type: 'datetime',
+                valueFormat: 'yyyy-MM-dd HH:mm:ss',
+            #end
+                rules: [{
+                    required: true,
+                    message: '请输入 ${field.comment}',
+                    trigger: 'blur'
+                }]
+            },
+            #end
+        #end
+    ]
+}

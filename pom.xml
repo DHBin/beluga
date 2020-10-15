@@ -19,7 +19,7 @@
         <minion.version>1.0.2-SNAPSHOT</minion.version>
         <orai18n.version>12.1.0.2.0</orai18n.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
-        <mybatis-plus.version>3.4.0</mybatis-plus.version>
+        <mybatis-plus.version>3.4.0.2-SNAPSHOT</mybatis-plus.version>
         <knife4j.version>2.0.4</knife4j.version>
         <projectVersion>${project.version}</projectVersion>
     </properties>

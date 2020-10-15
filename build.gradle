@@ -35,7 +35,7 @@ def databaseDepend = [
 def libVersion = [
         'minion-core': '1.0.2-SNAPSHOT',
         'easy-captcha': '1.6.2',
-        'mybatis-plus': '3.4.0',
+        'mybatis-plus': '3.4.0.2-SNAPSHOT',
         'knife4j': '2.0.4',
         'ehcache': '2.10.6',
 ]

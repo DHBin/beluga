@@ -1,0 +1,22 @@
+-- 菜单数据
+-- 主键id根据自己的项目情况填入
+-- 修改“父父编号”，上一级菜单num
+-- 替换全部“父编号”
+INSERT INTO sys_menu VALUES (菜单主键id, '$!{table.comment}', '$!{table.comment}', 2, '$!{firstLowerEntityName}', 'views/$!{package.ModuleName}/$!{firstLowerEntityName}', 'el-icon-s-tools', 父编号, 父父编号, 父编号, '$!{currentTime}', null, 1, 1);
+INSERT INTO sys_menu VALUES (列表主键id, '$!{table.comment}列表', '$!{table.comment}列表', 3, '', '', '', 父编号1, 父编号, 父编号1, '$!{currentTime}', null, 1, 1);
+INSERT INTO sys_menu VALUES (新增按钮主键id, '新增$!{table.comment}', '新增$!{table.comment}', 3, '', '', '', 父编号2, 父编号, 父编号2, '$!{currentTime}', null, 1, 1);
+INSERT INTO sys_menu VALUES (更新按钮主键id, '更新$!{table.comment}', '更新$!{table.comment}', 3, '', '', '', 父编号3, 父编号, 父编号3, '$!{currentTime}', null, 1, 1);
+INSERT INTO sys_menu VALUES (删除按钮主键id, '删除$!{table.comment}', '删除$!{table.comment}', 3, '', '', '', 父编号4, 父编号, 父编号4, '$!{currentTime}', null, 1, 1);
+
+-- 权限数据
+INSERT INTO sys_perm VALUES ('$!{sqlData.listPermId}',     '$!{table.comment}', '$!{table.comment}列表', '', '#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end', 'GET', '$!{table.name}_page', '$!{currentTime}', '$!{currentTime}', 1, 1);
+INSERT INTO sys_perm VALUES ('$!{sqlData.createPermId}',   '$!{table.comment}', '新增$!{table.comment}', '', '#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end', 'POST', '$!{table.name}_create', '$!{currentTime}', '$!{currentTime}', 1, 1);
+INSERT INTO sys_perm VALUES ('$!{sqlData.deletePermId}',   '$!{table.comment}', '删除$!{table.comment}', '', '#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end/{id:\\d+}', 'DELETE', '$!{table.name}_delete', '$!{currentTime}', '$!{currentTime}', 1, 1);
+INSERT INTO sys_perm VALUES ('$!{sqlData.updatePermId}',   '$!{table.comment}', '更新$!{table.comment}', '', '#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end', 'PUT', '$!{table.name}_update', '$!{currentTime}', '$!{currentTime}', 1, 1);
+INSERT INTO sys_perm VALUES ('$!{sqlData.retrievePermId}', '$!{table.comment}', '通过id获取$!{table.comment}', '', '#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end/{id:\\d+}', 'GET', '$!{table.name}_retrieve', '$!{currentTime}', '$!{currentTime}', 1, 1);
+
+-- 菜单-权限关联数据
+INSERT INTO sys_menu_perm VALUES (主键id, 列表主键id,     '$!{sqlData.listPermId}',  '$!{currentTime}', '$!{currentTime}', 1, 1);
+INSERT INTO sys_menu_perm VALUES (主键id, 新增按钮主键id, '$!{sqlData.createPermId}',   '$!{currentTime}', '$!{currentTime}', 1, 1);
+INSERT INTO sys_menu_perm VALUES (主键id, 更新按钮主键id, '$!{sqlData.updatePermId}',   '$!{currentTime}', '$!{currentTime}', 1, 1);
+INSERT INTO sys_menu_perm VALUES (主键id, 删除按钮主键id, '$!{sqlData.deletePermId}', '$!{currentTime}', '$!{currentTime}', 1, 1);
