@@ -42,7 +42,10 @@ public class SysDictItemServiceImpl extends MinionServiceImpl<SysDictItemMapper,
      */
     @Override
     public boolean save(SysDictItem entity) {
-        SysDictItem one = this.lambdaQuery().eq(SysDictItem::getItemValue, entity.getItemValue()).one();
+        SysDictItem one = this.lambdaQuery().select(SysDictItem::getId)
+                .eq(SysDictItem::getItemValue, entity.getItemValue())
+                .eq(SysDictItem::getDictId, entity.getDictId())
+                .one();
         ApiAssert.isNull(ErrorCode.SYS_DICT_ITEM_ITEM_VALUE_IS_EXIST, one);
         return super.save(entity);
     }
