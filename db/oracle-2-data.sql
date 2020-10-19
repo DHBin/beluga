@@ -1,9 +1,9 @@
 -- 菜单
 INSERT INTO SYS_MENU VALUES (1, '系统管理', '错误页面', 2, '/admin', '', 'el-icon-s-tools', 1, -1, 1, TO_DATE('2020-07-02 14:50:20', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-07-02 14:50:30', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
-INSERT INTO SYS_MENU VALUES (2, '用户管理', '500', 2, 'user', 'views/upms/user', 'el-icon-user-solid', 11, 1, 1, TO_DATE('2020-03-21 06:54:57', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-21 14:54:57', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
-INSERT INTO SYS_MENU VALUES (3, '角色管理', '400', 2, 'role', 'views/upms/role', 'el-icon-s-custom', 12, 1, 2, TO_DATE('2020-03-21 06:55:56', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-21 14:55:56', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
-INSERT INTO SYS_MENU VALUES (4, '菜单管理', '菜单', 2, 'menu', 'views/upms/menu', 'el-icon-menu', 13, 1, 3, TO_DATE('2020-03-21 06:54:09', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-21 14:54:09', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
-INSERT INTO SYS_MENU VALUES (5, '权限管理', NULL, 2, 'perm', 'views/upms/perm', 'el-icon-s-platform', 14, 1, 4, TO_DATE('2020-03-21 06:58:02', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-21 14:58:03', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO SYS_MENU VALUES (2, '用户管理', '500', 2, 'user', 'views/upms/user', 'icon-user', 11, 1, 1, TO_DATE('2020-03-21 06:54:57', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-21 14:54:57', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO SYS_MENU VALUES (3, '角色管理', '400', 2, 'role', 'views/upms/role', 'icon-jiaoseguanli', 12, 1, 2, TO_DATE('2020-03-21 06:55:56', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-21 14:55:56', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO SYS_MENU VALUES (4, '菜单管理', '菜单', 2, 'menu', 'views/upms/menu', 'icon-caidan1', 13, 1, 3, TO_DATE('2020-03-21 06:54:09', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-21 14:54:09', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO SYS_MENU VALUES (5, '权限管理', NULL, 2, 'perm', 'views/upms/perm', 'icon-jiaosequanxian', 14, 1, 4, TO_DATE('2020-03-21 06:58:02', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-21 14:58:03', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
 INSERT INTO SYS_MENU VALUES (6, '新增用户', NULL, 3, '', '', '', 111, 11, 111, TO_DATE('2020-07-02 17:34:27', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-07-02 17:34:37', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
 INSERT INTO SYS_MENU VALUES (7, '更新用户', NULL, 3, '', '', '', 112, 11, 112, TO_DATE('2020-07-02 17:55:55', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-07-02 17:56:05', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
 INSERT INTO SYS_MENU VALUES (8, '用户列表', NULL, 3, '', '', '', 110, 11, 110, TO_DATE('2020-07-03 08:59:43', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-07-03 08:59:54', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
@@ -72,7 +72,7 @@ INSERT INTO SYS_PERM VALUES ('b9bdbd66666e615c5635c4d232fe84ab', '菜单', '更�
 INSERT INTO SYS_PERM VALUES ('da3fa36b04b33fc4c24a2192fa98a129', '权限', '分页获取角色', '', '/upms/role', 'GET', 'sys_role_list', TO_DATE('2020-07-04 23:01:05', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-07-04 23:01:05', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
 INSERT INTO SYS_PERM VALUES ('dace5c3dc2e1b2de682bb3b34f5297d5', '权限', '删除角色', '', '/upms/role/{id:\\d+}', 'DELETE', 'sys_role_delete', TO_DATE('2020-07-04 23:01:05', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-07-04 23:01:05', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
 INSERT INTO SYS_PERM VALUES ('e77ff0adab18c95f75e13d477b569d69', '权限', '获取所有角色', '', '/upms/role/all', 'GET', 'sys_role_all', TO_DATE('2020-07-04 23:01:05', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-07-04 23:01:05', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
-INSERT INTO SYS_PERM VALUES ('a9332353eb99d11721c8e91c79f73ce5', '用户', '修改密码', '', '/upms/user/changePassword', 'POST', '', TO_DATE('2020-07-04 23:01:05'), TO_DATE('2020-07-04 23:01:05'), 1, 1);
+INSERT INTO SYS_PERM VALUES ('a9332353eb99d11721c8e91c79f73ce5', '用户', '修改密码', '', '/upms/user/changePassword', 'POST', '', TO_DATE('2020-07-04 23:01:05', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-07-04 23:01:05', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
 
 -- 角色
 INSERT INTO SYS_ROLE VALUES (1, '管理员', 'role_admin', '管理员（不要删除哦）', TO_DATE('2020-03-21 14:01:31', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-21 22:01:32', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
@@ -108,3 +108,37 @@ INSERT INTO SYS_USER VALUES (2, 'DHB', '100010', 'xx158@qq.com', '{bcrypt}$2a$10
 
 -- 用户-角色关系
 INSERT INTO SYS_USER_ROLE VALUES (1, 1, 1, TO_DATE('2020-07-03 16:41:16', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-07-03 16:41:16', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+
+
+-- 字典数据
+INSERT INTO sys_menu VALUES (24, '字典管理', '字典', 2, 'sysDict', 'views/upms/sysDict', 'icon-zidianbiaoguanli', 15, 1, 15, TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), null, 1, 1);
+INSERT INTO sys_menu VALUES (25, '字典列表', '字典列表', 3, '', '', '', 151, 15, 151, TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), null, 1, 1);
+INSERT INTO sys_menu VALUES (26, '新增字典', '新增字典', 3, '', '', '', 152, 15, 152, TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), null, 1, 1);
+INSERT INTO sys_menu VALUES (27, '更新字典', '更新字典', 3, '', '', '', 153, 15, 153, TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), null, 1, 1);
+INSERT INTO sys_menu VALUES (28, '删除字典', '删除字典', 3, '', '', '', 154, 15, 154, TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), null, 1, 1);
+INSERT INTO sys_menu VALUES (29, '字典项', '字典项', 3, '', '', '', 155, 15, 155, TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), null, 1, 1);
+INSERT INTO sys_perm VALUES ('a68cfc9c860eacb1444f400004f5687c',     '字典', '字典列表', '', '/upms/sysDict', 'GET', 'SYS_DICT_page', TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_perm VALUES ('868238d988bdbd5bd5c1f6deb0b7d4e0',   '字典', '新增字典', '', '/upms/sysDict', 'POST', 'SYS_DICT_create', TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_perm VALUES ('66c54726208119aca6e2590ec80b1f99',   '字典', '删除字典', '', '/upms/sysDict/{id:\\d+}', 'DELETE', 'SYS_DICT_delete', TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_perm VALUES ('1620fb3b447018f5c31b30917a1b558d',   '字典', '更新字典', '', '/upms/sysDict', 'PUT', 'SYS_DICT_update', TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_perm VALUES ('25a14bbb5914257d8550392f333f8920', '字典', '通过id获取字典', '', '/upms/sysDict/{id:\\d+}', 'GET', 'SYS_DICT_retrieve', TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_menu_perm VALUES (22, 25,     'a68cfc9c860eacb1444f400004f5687c',  TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_menu_perm VALUES (23, 26, '868238d988bdbd5bd5c1f6deb0b7d4e0',   TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_menu_perm VALUES (24, 27, '1620fb3b447018f5c31b30917a1b558d',   TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_menu_perm VALUES (25, 28, '66c54726208119aca6e2590ec80b1f99', TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_menu_perm VALUES (26, 29, '9a339e9fc4fbc5b5a36f741413c4af72', TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_menu_perm VALUES (27, 29, 'f290dff400b71f0cd38fb0c70fe67c4e', TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_menu_perm VALUES (28, 29, '23dd4a7f04b612f39b8c345506a14135', TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_menu_perm VALUES (29, 29, 'f197436087cc2f95d6aceba1635d70dd', TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_menu_perm VALUES (30, 29, 'db7de42eaa0ab384e2b795672f5b74e1', TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 09:04:44', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_role_menu VALUES (24, 1, 24, TO_DATE('2020-03-26 00:01:20', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-26 00:01:20', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_role_menu VALUES (25, 1, 25, TO_DATE('2020-03-26 00:01:20', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-26 00:01:20', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_role_menu VALUES (26, 1, 26, TO_DATE('2020-03-26 00:01:20', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-26 00:01:20', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_role_menu VALUES (27, 1, 27, TO_DATE('2020-03-26 00:01:20', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-26 00:01:20', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_role_menu VALUES (28, 1, 28, TO_DATE('2020-03-26 00:01:20', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-26 00:01:20', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_role_menu VALUES (29, 1, 29, TO_DATE('2020-03-26 00:01:20', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-03-26 00:01:20', 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_perm VALUES ('9a339e9fc4fbc5b5a36f741413c4af72',     '字典项', '字典项列表', '', '/upms/sysDictItem', 'GET', 'SYS_DICT_ITEM_page', TO_DATE('2020-10-16 11:36:20' , 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 11:36:20' , 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_perm VALUES ('f290dff400b71f0cd38fb0c70fe67c4e',   '字典项', '新增字典项', '', '/upms/sysDictItem', 'POST', 'SYS_DICT_ITEM_create', TO_DATE('2020-10-16 11:36:20' , 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 11:36:20' , 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_perm VALUES ('23dd4a7f04b612f39b8c345506a14135',   '字典项', '删除字典项', '', '/upms/sysDictItem/{id:\\d+}', 'DELETE', 'SYS_DICT_ITEM_delete', TO_DATE('2020-10-16 11:36:20' , 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 11:36:20' , 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_perm VALUES ('f197436087cc2f95d6aceba1635d70dd',   '字典项', '更新字典项', '', '/upms/sysDictItem', 'PUT', 'SYS_DICT_ITEM_update', TO_DATE('2020-10-16 11:36:20' , 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 11:36:20' , 'YYYY-MM-DD HH24:MI:SS'), 1, 1);
+INSERT INTO sys_perm VALUES ('db7de42eaa0ab384e2b795672f5b74e1', '字典项', '通过id获取字典项', '', '/upms/sysDictItem/{id:\\d+}', 'GET', 'SYS_DICT_ITEM_retrieve', TO_DATE('2020-10-16 11:36:20' , 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2020-10-16 11:36:20' , 'YYYY-MM-DD HH24:MI:SS'), 1, 1);

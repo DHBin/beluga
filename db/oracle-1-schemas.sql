@@ -121,3 +121,36 @@ CREATE TABLE sys_user_role
     update_uid  number(20) NULL,
     PRIMARY KEY (id)
 );
+
+-- 字典表
+CREATE TABLE sys_dict
+(
+    id          number(20)              NOT NULL,
+    type        varchar(100)            NOT NULL,
+    description varchar(100) DEFAULT '' NOT NULL,
+    create_time date                    NOT NULL,
+    update_time date                    NULL,
+    create_uid  number(20)              NOT NULL,
+    update_uid  number(20)              NULL,
+    PRIMARY KEY (id)
+);
+
+COMMENT ON table sys_dict is '字典';
+
+-- 字典项表
+CREATE TABLE sys_dict_item
+(
+    id          number(20)              NOT NULL,
+    dict_id     number(20)              NOT NULL,
+    item_value  varchar(100)            NOT NULL,
+    item_label  varchar(100)            NOT NULL,
+    description varchar(100) DEFAULT '' NOT NULL,
+    sort_num    number(10)      DEFAULT 0  NOT NULL,
+    create_time date                    NOT NULL,
+    update_time date                    NULL,
+    create_uid  number(20)              NOT NULL,
+    update_uid  number(20)              NULL,
+    PRIMARY KEY (id)
+);
+
+COMMENT ON table sys_dict_item is '字典项';

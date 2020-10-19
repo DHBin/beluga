@@ -121,3 +121,34 @@ CREATE TABLE `sys_user_role`
     `update_uid`  bigint(20) UNSIGNED NULL COMMENT '更新uid',
     PRIMARY KEY (`id`) USING BTREE
 ) COMMENT '用户-角色关系';
+
+
+-- 字典表
+CREATE TABLE sys_dict
+(
+    id          bigint(20)              NOT NULL,
+    type        varchar(100)            NOT NULL COMMENT '类型',
+    description varchar(100) DEFAULT '' NOT NULL COMMENT '描述',
+    create_time datetime                NOT NULL COMMENT '创建时间',
+    update_time datetime                NULL COMMENT '更新时间',
+    create_uid  bigint(20)              NOT NULL COMMENT '创建uid',
+    update_uid  bigint(20)              NULL COMMENT '更新uid',
+    PRIMARY KEY (id)
+) COMMENT '字典';
+
+
+-- 字典项表
+CREATE TABLE sys_dict_item
+(
+    id          bigint(20)              NOT NULL,
+    dict_id     bigint(20)              NOT NULL COMMENT '字典id',
+    item_value  varchar(100)            NOT NULL COMMENT '值',
+    item_label  varchar(100)            NOT NULL COMMENT '标签名',
+    description varchar(100) DEFAULT '' NOT NULL COMMENT '描述',
+    sort_num    int(10)      DEFAULT 0  NOT NULL COMMENT '排序编号',
+    create_time datetime                NOT NULL COMMENT '创建时间',
+    update_time datetime                NULL COMMENT '更新时间',
+    create_uid  bigint(20)              NOT NULL COMMENT '创建uid',
+    update_uid  bigint(20)              NULL COMMENT '更新uid',
+    PRIMARY KEY (id)
+) comment '字典项';

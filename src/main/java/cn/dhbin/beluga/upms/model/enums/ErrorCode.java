@@ -32,6 +32,19 @@ public enum ErrorCode implements IErrorCode<Object> {
      */
     REFRESH_TOKEN_ERROR(10_00_4, "刷新token失败"),
 
+    /**
+     * 字典类型已存在
+     */
+    SYS_DICT_TYPE_IS_EXIST(10_00_5, "字典类型已存在"),
+    /**
+     * 字典类型不存在
+     */
+    SYS_DICT_TYPE_IS_NOT_EXIST(10_00_6, "字典类型不存在"),
+    /**
+     * 字典项已经存在
+     */
+    SYS_DICT_ITEM_ITEM_VALUE_IS_EXIST(10_00_7, "字典项已经存在"),
+
     ;
 
     private final Integer status;
