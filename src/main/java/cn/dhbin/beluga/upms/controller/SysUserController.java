@@ -14,11 +14,13 @@ import cn.dhbin.beluga.upms.service.SysUserService;
 import cn.dhbin.beluga.util.SecurityUtil;
 import cn.dhbin.minion.core.common.response.ApiResponse;
 import cn.dhbin.minion.core.mybatis.model.PageModel;
+import cn.dhbin.minion.core.restful.config.props.MinionConfigProperties;
 import cn.dhbin.minion.core.restful.controller.RestfulController;
 import cn.dhbin.minion.core.restful.util.ApiAssert;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +39,7 @@ import javax.validation.constraints.NotBlank;
 @RequiredArgsConstructor
 @Api(tags = "用户")
 @Slf4j
+@Validated
 public class SysUserController extends RestfulController {
 
     private final SysUserService sysUserService;
@@ -44,6 +47,8 @@ public class SysUserController extends RestfulController {
     private final LoginService loginService;
 
     private final CaptchaService captchaService;
+
+    private final MinionConfigProperties configProperties;
 
     @GetMapping("getUserInfo")
     @ApiOperation(value = "获取当前用户信息")
@@ -54,9 +59,12 @@ public class SysUserController extends RestfulController {
     }
 
     @PostMapping("/login")
-    @ApiOperation(value = "用户登录")
-    public ApiResponse<?> login(String username, String password, @RequestParam("r") String randomStr, String code) {
-        boolean valid = captchaService.valid(randomStr, code);
+    @ApiOperation(value = "用户登录", notes = "开发环境默认关闭验证码")
+    public ApiResponse<?> login(@NotBlank(message = "用户名不能为空") @ApiParam("用户名") String username,
+                                @NotBlank(message = "密码不能为空") @ApiParam("密码") String password,
+                                @RequestParam(value = "r", required = false) @ApiParam(value = "随机值") String randomStr,
+                                @RequestParam(required = false) @ApiParam(value = "验证码") String code) {
+        boolean valid = configProperties.getDev() || captchaService.valid(randomStr, code);
         ApiAssert.isTrue(ErrorCode.CAPTCHA_INVALID, valid);
         try {
             String token = loginService.login(username, password);
