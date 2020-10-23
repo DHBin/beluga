@@ -20,4 +20,4 @@ minion:
   # 是否开发环境标识
   # - 如果是开发环境不需要检验图形验证码
   # - 开启sql打印
-  dev: true
+  dev: ${BELUGA_IS_DEV:true}
