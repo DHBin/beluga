@@ -45,7 +45,7 @@ public class SqlDataGenerateStrategyImpl implements SqlDataGenerateStrategy {
 
         sqlData.setListPermId(SecureUtil.md5(comment + "GET" + baseUrl));
         sqlData.setCreatePermId(SecureUtil.md5(comment + "POST" + baseUrl));
-        sqlData.setDeletePermId(SecureUtil.md5(comment + "PUT" + baseUrlWithIdPath));
+        sqlData.setDeletePermId(SecureUtil.md5(comment + "DELETE" + baseUrlWithIdPath));
         sqlData.setUpdatePermId(SecureUtil.md5(comment + "PUT" + baseUrl));
         sqlData.setRetrievePermId(SecureUtil.md5(comment + "GET" + baseUrlWithIdPath));
         return sqlData;
